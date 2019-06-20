@@ -5,7 +5,6 @@ You are required to perform the following:
 * Use Jenkinsfile to achieve the following:
     * Pull a Python app from this repo (spinning-spindle/lab-devops)
     * Dockerize the app `hello_world.py`
-    * Run `test.py` which contains unit tests, and show results to Jenkins job
     * Publish docker image to dockerhub (use your own temporary account)
 * Spin up an [Ansible](https://www.ansible.com/) instance 
    * Provision the image you created above, on your local machine
@@ -14,6 +13,7 @@ You are required to perform the following:
 # Bonus:
 * Improve the the above setup by considering the use of SSL certificates
 * How to provisioning better using docker-compose or kubernetes and why do that?
+* Create a staging environment for running integration tests as part of the build process and publish results to jenkins job
 
 # Providing your contribution
 * Create a pull-request on this repository that contains, the following:
