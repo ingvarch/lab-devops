@@ -20,8 +20,8 @@ You are required to perform the following:
   * for Jenkins, an export of the Job
   * for Ansible, the playbook
   * any other files you deem necessary
-  * a Markdown README, with a narrative of the approach taken
-   - What principles did you apply?
-   - Explain the decisions you made and why you thought it was the best approach
-   - If you ran out of time, how did you envision your finished infrastructure?
-   - What is your recommendation for any future work?
+  * a Markdown README, with a narrative of the approach taken. Consider the following:
+      - What principles did you apply?
+      - Explain the decisions you made and why you thought it was the best approach
+      - If you ran out of time, how did you envision your finished infrastructure?
+      - What is your recommendation for any future work?
