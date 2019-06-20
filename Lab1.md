@@ -8,7 +8,7 @@ You are required to perform the following:
     * Run `test.py` which contains unit tests, and show results to Jenkins job
     * Publish docker image to dockerhub (use your own temporary account)
 * Spin up an [Ansible](https://www.ansible.com/) instance 
-   * Provision the image you created on your local machine
+   * Provision the image you created above, on your local machine
 * Make sure you take the necessary precautions regarding security when you deploy in order to expose the application only on localhost
 
 # Bonus:
