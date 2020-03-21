@@ -4,8 +4,10 @@ node {
     }
     try{
         stage('Tests') {
-            sh 'pip install flask pytest'
-            sh 'pytest test_status200.py'
+            docker.image('python:3.8-alpine').inside('-u 0:0') {
+                sh 'pip install pytest flask'
+                sh 'pytest test_status200.py'
+            }
         }
     }
     catch(e){
@@ -13,8 +15,9 @@ node {
     }
     stage('Docker-build'){
         docker.withRegistry('', 'docker_registry') {
-            docker.build("ingvarch/lab-devops:${env.BUILD_NUMBER}")
-            docker.push()
+            def devopsLab = docker.build("ingvarch/lab-devops:${env.BUILD_NUMBER}")
+            devopsLab.push()
+            devopsLab.push('latest')
         }
     }
 }
