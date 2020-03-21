@@ -1,0 +1,6 @@
+#  terraform states
+#  they should be saved in remote storage
+#  like s3, gcs, terraform cloud
+
+*\.tfstate*
+\.terraform/
