@@ -6,3 +6,7 @@ provider "digitalocean" {
 provider "tls" {
   version = "~> 2.1"
 }
+
+provider "null" {
+  version = "~> 2.1"
+}

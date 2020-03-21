@@ -36,4 +36,30 @@ resource "digitalocean_droplet" "jenkins" {
   }
 }
 
-# /var/lib/jenkins/secrets/initialAdminPassword
+# Need to create Jenkins job - lab-devops
+# TO-DO: reaserch how to create jobs by jenkins-cli
+resource "null_resource" "cluster" {
+  # Check MD5 jenkins jobs
+  triggers = {
+    job_config = md5(file("jobs/lab-devops/config.xml"))
+  }
+
+  # Copy prepared jenkins job
+  provisioner "file" {
+    source      = "jobs/lab-devops"
+    destination = "/var/lib/jenkins/jobs"
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "service jenkins restart",
+    ]
+  }
+
+  connection {
+    type        = "ssh"
+    user        = "root"
+    host        = digitalocean_droplet.jenkins.ipv4_address
+    private_key = tls_private_key.jenkins.private_key_pem
+  }
+}
