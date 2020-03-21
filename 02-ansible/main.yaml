@@ -1,0 +1,8 @@
+---
+- hosts: localhost
+  tasks:
+    - name: Run Flask app
+      docker_container:
+        name: lab-devops
+        image: ingvarch/lab-devops:latest
+        ports: 127.0.0.1:8080:8080
