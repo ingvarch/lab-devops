@@ -13,6 +13,9 @@ node {
     catch(e){
         throw e
     }
+    finally {
+        junit allowEmptyResults: true, testResults: 'test-reports/results.xml', fingerprint: true
+    }
     stage('Docker-build'){
         docker.withRegistry('', 'docker_registry') {
             def devopsLab = docker.build("ingvarch/lab-devops:${env.BUILD_NUMBER}")
