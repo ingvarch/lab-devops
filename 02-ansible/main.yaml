@@ -1,8 +1,41 @@
 ---
 - hosts: localhost
   tasks:
+    - name: Create a directory if it does not exist
+      file:
+        path: /tmp/certs/
+        state: directory
+        mode: '0755'
+
+    - name: Generate an OpenSSL private key with the default values (4096 bits, RSA)
+      openssl_privatekey:
+        path: /tmp/certs/lab-devops.app.pem
+
+    - name: Generate an OpenSSL Certificate Signing Request
+      openssl_csr:
+        path: /tmp/certs/lab-devops.app.csr
+        privatekey_path: /tmp/certs/lab-devops.app.pem
+        common_name: lab-devops.app
+
+    - name: Generate a Self Signed OpenSSL certificate
+      openssl_certificate:
+        path: /tmp/certs/lab-devops.app.crt
+        privatekey_path: /tmp/certs/lab-devops.app.pem
+        csr_path: /tmp/certs/lab-devops.app.csr
+        provider: selfsigned
+
     - name: Run Flask app
       docker_container:
         name: lab-devops
         image: ingvarch/lab-devops:latest
-        ports: 127.0.0.1:8080:8080
+
+    - name: Run nginx
+      docker_container:
+        name: nginx
+        image: nginx:1.17.0-alpine
+        ports: 127.0.0.1:8443:8443
+        links:
+          - lab-devops
+        volumes: 
+          - "{{ lookup('env', 'PWD') }}/nginx:/etc/nginx/conf.d:ro"
+          - "/tmp/certs:/etc/ssl:ro"
