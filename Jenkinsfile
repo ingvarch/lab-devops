@@ -6,7 +6,7 @@ node {
         stage('Tests') {
             docker.image('python:3.8-alpine').inside('-u 0:0') {
                 sh 'pip install pytest flask'
-                sh 'pytest test_status200.py'
+                sh 'pytest --verbose --junit-xml test-reports/results.xml'
             }
         }
     }
